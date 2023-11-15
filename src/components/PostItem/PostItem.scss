@@ -1,0 +1,43 @@
+.post {
+    .content {
+        display: flex;
+        gap: 15px;
+    }
+    .delete {
+        height: 40px;
+        display: flex;
+    }
+    justify-content: space-between;
+    display: flex;
+    gap: 15px;
+    border-bottom: 0.5px solid rgb(232, 232, 232);
+    padding: 30px 15px;
+    border-radius: 5px;
+    .avatar {
+        border-radius: 100%;
+        background-color: black;
+        height: 75px;
+        width: 75px;
+    }
+    .text {
+        min-height: 75px;
+    }
+    min-height: 100px;
+    .reaction {
+        &__wrapper {
+            display: flex;
+            gap: 10px;
+        }
+        &__item {
+            &-active {
+                background-color: blueviolet;
+                color: white;
+            }
+            border-radius: 5px;
+            font-size: 18px;
+            padding: 5px 12px;
+            border: none;
+            cursor: pointer
+        }
+    }
+}

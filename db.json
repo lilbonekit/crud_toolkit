@@ -1,0 +1,37 @@
+{
+  "posts": [
+    {
+      "id": "loyw7xf90.b0nr5lfj0u",
+      "username": "Valera only mid",
+      "comment": "Здарова педики!",
+      "currentReaction": "angry",
+      "reactions": {
+        "lol": 13,
+        "like": 2,
+        "angry": 4
+      }
+    },
+    {
+      "id": "lozrfnzf0.1ocfmr6k55l",
+      "username": "Valera only mid",
+      "comment": "фывфыв",
+      "reactions": {
+        "lol": 0,
+        "like": 1,
+        "angry": 2
+      },
+      "currentReaction": "like"
+    },
+    {
+      "id": "lozrfnzf0.1ocfmr6k55l",
+      "username": "Devil Hacker",
+      "comment": "фывфыв",
+      "reactions": {
+        "lol": 0,
+        "like": 1,
+        "angry": 2
+      },
+      "currentReaction": "like"
+    }
+  ]
+}
