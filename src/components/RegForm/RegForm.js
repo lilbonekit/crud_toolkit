@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useInput } from '../hooks/useInput'
 import { createUser } from '../store/currentUserSlice'
+import { Spinner } from '../SVG/Spinner'
 
 const RegForm = () => {
     const dispatch = useDispatch()
 
-    const {error} = useSelector(state => state.currentUser)
+    const {error, status} = useSelector(state => state.currentUser)
+    console.log(status)
 
     const username = useInput('')
     const password = useInput('')
@@ -59,9 +61,11 @@ const RegForm = () => {
                            <p className="error-msg">{password.errorMsg}</p>
                 </label>
                 {error ? <p className="error-msg">{error}</p> : null}
-                <input 
+                <input
+                    disabled={status === 'loading'} 
                     type="submit" 
                     value="Зарегистироваться"/>
+                    {status === 'loading' ? <Spinner/> : null}
                 <Link to="/login" className="login-btn">Уже есть аккаунт?</Link>
             </form>
         </>

@@ -44,3 +44,10 @@ input[type="submit"] {
 .input-error {
   border: 1px solid red;
 }
+
+[disabled] {
+  /* Ваши стили здесь */
+  color: gray;
+  background-color: lightgray;
+  cursor: not-allowed;
+}

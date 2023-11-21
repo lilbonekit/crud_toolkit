@@ -113,13 +113,20 @@ const currentUserSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(createUser.rejected, (state, action) => {
             state.error = action.payload
+            state.status = 'idle'
+        })
+
+        builder.addCase(createUser.pending, (state, action) => {
+            state.status = 'loading'
         })
 
         builder.addCase(getUser.rejected, (state, action) => {
             state.error = action.payload
+            state.status = 'idle'
         })
 
         builder.addCase(getUser.pending, (state, action) => {
+            state.status = 'loading'
             state.error = false
         })
     }

@@ -164,6 +164,17 @@
         "angry": 0
       },
       "currentReaction": null
+    },
+    {
+      "id": "lp8rzws80.eg7ygmld85",
+      "username": "123",
+      "comment": "фыв2",
+      "reactions": {
+        "lol": 0,
+        "like": 0,
+        "angry": 0
+      },
+      "currentReaction": null
     }
   ],
   "users": [
@@ -199,6 +210,13 @@
       "username": "6",
       "password": "123",
       "id": "0.51204055059312432023-11-21T17:14:34.445Z",
+      "currentReaction": null,
+      "isLogged": true
+    },
+    {
+      "username": "123",
+      "password": "123",
+      "id": "0.94619239839618332023-11-21T20:15:48.799Z",
       "currentReaction": null,
       "isLogged": true
     }

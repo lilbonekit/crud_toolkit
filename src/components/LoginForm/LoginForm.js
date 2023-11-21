@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useInput } from '../hooks/useInput'
 import { getUser } from '../store/currentUserSlice'
+import { Spinner } from '../SVG/Spinner'
 
 const LoginForm = () => {
     const dispatch = useDispatch()
 
-    const {error} = useSelector(state => state.currentUser)
+    const {error, status} = useSelector(state => state.currentUser)
 
     const username = useInput('')
     const password = useInput('')
@@ -59,9 +60,11 @@ const LoginForm = () => {
                            <p className="error-msg">{password.errorMsg}</p>
                 </label>
                 {error ? <p className="error-msg">{error}</p> : null}
-                <input 
+                <input
+                    disabled={status === 'loading'}  
                     type="submit" 
                     value="Авторизироваться"/>
+                    {status === 'loading' ? <Spinner/> : null}
                 <Link to="/registration" className="login-btn">Нет аккаунта?</Link>
             </form>
         </>
