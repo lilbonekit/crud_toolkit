@@ -2,11 +2,14 @@ import './PostItem.scss'
 import classNames from 'classnames';
 import { patchData, deletePost } from '../store/postsSlice'
 import { useDispatch } from 'react-redux'
+import useAuth from '../hooks/useAuth';
 import { useRef } from 'react'
 
 
 const PostItem = ({id, username, comment, reactions : {lol, like, angry}, currentReaction}) => {
 
+    const state = useAuth()
+    
     //Мне нужны изначальные значения, потому что я буду откатываться к ним
     const referalValues = useRef({lol, like, angry}).current  
     const dispatch = useDispatch()
@@ -73,7 +76,7 @@ const PostItem = ({id, username, comment, reactions : {lol, like, angry}, curren
                     </div>
                 </div>
             </div>
-            {username === 'Valera only mid' ?
+            {username === state.user.username ?
                 <button 
                 className="reaction__item delete"
                 onClick={() => dispatch(deletePost({id}))}>

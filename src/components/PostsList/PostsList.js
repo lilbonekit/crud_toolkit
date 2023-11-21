@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux/es/hooks/useSelector"
-import Spinner from "../Spinner/Spinner"
+import { Spinner } from "../SVG/Spinner"
 
 import PostItem from "../PostItem/PostItem"
 

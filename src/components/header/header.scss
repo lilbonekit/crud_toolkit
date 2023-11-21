@@ -3,8 +3,79 @@ header {
     padding: 40px;
     background-color: blueviolet;
     color: white;
+    .username {
+        font-weight: 700;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        &:hover {
+            svg {
+                scale: 0.85;
+            }
+            &::after{
+                width: 0%;
+            }
+        }
+        
+        svg {
+            transition: .3s all ease;
+            width: 40px;
+            height: 40px;
+            path {
+                fill: white;
+            }
+        }
+    }
+    .logo {
+        text-decoration: none;
+        &::after {
+            display: none;
+        }
+    }
     h1 {
         text-align: center;
         font-size: 40px;
+    }
+    a {
+        color: white;
+        font-size: 18px;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        transition: .3s all ease;
+        &:hover {
+            transition: .3s all ease;
+            &::after {
+                transition: .3s all ease;
+                width: 75%;
+            }
+        }
+        &::after {
+            content: '';
+            display: block;
+            margin: 0 auto;
+            height: 5px;
+            background-color: white;
+            width: 0%;
+            transition: .3s all ease;
+        }
+    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+    .active {
+        color: white;
+        &::after {
+            width: 100%;
+            transition: .3s all ease;
+        }
     }
 }

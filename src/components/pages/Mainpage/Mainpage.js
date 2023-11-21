@@ -1,5 +1,5 @@
-import AddForm from '../../components/AddForm/AddForm';
-import PostsList from '../../components/PostsList/PostsList';
+import AddForm from '../../AddForm/AddForm';
+import PostsList from '../../PostsList/PostsList';
 
 import './Mainpage.scss'
 

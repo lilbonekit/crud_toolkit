@@ -20,12 +20,12 @@ export const fetchPosts = createAsyncThunk(
 
 export const postData = createAsyncThunk(
     'posts/postData',
-    async function(comment, {rejectWithValue, dispatch}) {
+    async function({value, username}, {rejectWithValue, dispatch}) {
 
         const newPost = {
             id: Date.now().toString(36) + Math.random().toString(36),
-            username: "Valera only mid",
-            comment,
+            username,
+            comment : value,
             reactions: {
                 lol: 0,
                 like: 0,
@@ -165,12 +165,12 @@ const postsSlice = createSlice({
 
         // Обрабатываем DELETE 
 
-        builder.addCase(postData.rejected, (state, action) => {
+        builder.addCase(deleteData.rejected, (state, action) => {
             state.error = 'Ошибка! Не удалось удалить ваш пост!'
             state.status = 'idle'
         })
 
-        builder.addCase(postData.pending, (state, action) => {
+        builder.addCase(deleteData.pending, (state, action) => {
             state.status = 'pending'
             state.error = false
         })

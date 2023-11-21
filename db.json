@@ -4,7 +4,7 @@
       "id": "loyw7xf90.b0nr5lfj0u",
       "username": "Valera only mid",
       "comment": "Здарова педики!",
-      "currentReaction": "angry",
+      "currentReaction": null,
       "reactions": {
         "lol": 13,
         "like": 2,
@@ -20,18 +20,187 @@
         "like": 1,
         "angry": 2
       },
-      "currentReaction": "like"
+      "currentReaction": null
     },
     {
-      "id": "lozrfnzf0.1ocfmr6k55l",
+      "id": "lozrfnzf0.1ocfmr6k51l",
       "username": "Devil Hacker",
       "comment": "фывфыв",
       "reactions": {
-        "lol": 0,
+        "lol": 1,
         "like": 1,
         "angry": 2
       },
-      "currentReaction": "like"
+      "currentReaction": null
+    },
+    {
+      "id": "lp8azo0k0.bwknz65f8n6",
+      "username": "16 котёнок плачет",
+      "comment": "Здарова педики",
+      "reactions": {
+        "lol": 0,
+        "like": 1,
+        "angry": 0
+      },
+      "currentReaction": null
+    },
+    {
+      "id": "lp8bacac0.ugqjyiqge7e",
+      "username": "sddd",
+      "comment": "dasd",
+      "reactions": {
+        "lol": 0,
+        "like": 0,
+        "angry": 0
+      },
+      "currentReaction": null
+    },
+    {
+      "id": "lp8bilis0.007ua2oxsx5di",
+      "username": "sd",
+      "comment": "weqe",
+      "reactions": {
+        "lol": 0,
+        "like": 0,
+        "angry": 0
+      },
+      "currentReaction": null
+    },
+    {
+      "id": "lp8cvasp0.iqg9yo98bm",
+      "username": "90",
+      "comment": "sadsad",
+      "reactions": {
+        "lol": 0,
+        "like": 0,
+        "angry": 0
+      },
+      "currentReaction": null
+    },
+    {
+      "id": "lp8f1msl0.3zrk036uu58",
+      "username": "1",
+      "comment": "ыфв",
+      "reactions": {
+        "lol": 0,
+        "like": 0,
+        "angry": 0
+      },
+      "currentReaction": null
+    },
+    {
+      "id": "lp8h0twr0.mb9rm2uwvyp",
+      "username": "1",
+      "comment": "sad",
+      "reactions": {
+        "lol": 0,
+        "like": 0,
+        "angry": 0
+      },
+      "currentReaction": null
+    },
+    {
+      "id": "lp8hi5ld0.crztub0utbd",
+      "username": "Maksimka3000",
+      "comment": "assadsad",
+      "reactions": {
+        "lol": 0,
+        "like": 0,
+        "angry": 0
+      },
+      "currentReaction": null
+    },
+    {
+      "id": "lp8hkiw90.8ldctkm2h0l",
+      "username": "Maksimka3000",
+      "comment": "asdsadsad",
+      "reactions": {
+        "lol": 0,
+        "like": 0,
+        "angry": 0
+      },
+      "currentReaction": null
+    },
+    {
+      "id": "lp8lmcpr0.qk77207necl",
+      "username": "6",
+      "comment": "цйвц",
+      "reactions": {
+        "lol": 0,
+        "like": 0,
+        "angry": 0
+      },
+      "currentReaction": null
+    },
+    {
+      "id": "lp8ln9br0.y2hzxj5wjuq",
+      "username": "6",
+      "comment": "креапа",
+      "reactions": {
+        "lol": 0,
+        "like": 0,
+        "angry": 0
+      },
+      "currentReaction": null
+    },
+    {
+      "id": "lp8lngce0.ksloac3m5si",
+      "username": "6",
+      "comment": "укауаdd",
+      "reactions": {
+        "lol": 0,
+        "like": 0,
+        "angry": 0
+      },
+      "currentReaction": null
+    },
+    {
+      "id": "lp8lom7p0.hk2u71jree5",
+      "username": "1",
+      "comment": "асасас",
+      "reactions": {
+        "lol": 0,
+        "like": 0,
+        "angry": 0
+      },
+      "currentReaction": null
+    }
+  ],
+  "users": [
+    {
+      "username": "1",
+      "password": "1",
+      "id": "0.94023787949073332023-11-21T16:49:34.703Z",
+      "currentReaction": null,
+      "isLogged": true
+    },
+    {
+      "username": "2",
+      "password": "2",
+      "id": "0.0347342507877870242023-11-21T16:50:17.783Z",
+      "currentReaction": null,
+      "isLogged": true
+    },
+    {
+      "username": "3",
+      "password": "1",
+      "id": "0.90682751607401532023-11-21T16:50:41.014Z",
+      "currentReaction": null,
+      "isLogged": true
+    },
+    {
+      "username": "2123",
+      "password": "222",
+      "id": "0.53071738232579782023-11-21T17:05:24.128Z",
+      "currentReaction": null,
+      "isLogged": true
+    },
+    {
+      "username": "6",
+      "password": "123",
+      "id": "0.51204055059312432023-11-21T17:14:34.445Z",
+      "currentReaction": null,
+      "isLogged": true
     }
   ]
 }
