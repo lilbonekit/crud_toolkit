@@ -20,7 +20,8 @@
       "comment": "фывцв",
       "reactions": {
         "lol": [
-          "йцу"
+          "йцу",
+          "1"
         ],
         "like": [],
         "angry": []
@@ -33,7 +34,8 @@
       "reactions": {
         "lol": [],
         "like": [
-          "йцу"
+          "йцу",
+          "1"
         ],
         "angry": []
       }
@@ -43,10 +45,10 @@
       "username": "ййй",
       "comment": "132",
       "reactions": {
-        "lol": [],
-        "like": [
+        "lol": [
           "1"
         ],
+        "like": [],
         "angry": [
           "ййй"
         ]

@@ -1,13 +1,13 @@
 import './PostItem.scss'
 
-import classNames from 'classnames';
+import classNames from 'classnames'
 
 import { patchData, deleteData } from '../store/postsSlice'
 
 import { useDispatch } from 'react-redux'
-import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/useAuth'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
 
 const PostItem = ({id, username, comment, reactions : {lol, like, angry}}) => {
@@ -17,9 +17,6 @@ const PostItem = ({id, username, comment, reactions : {lol, like, angry}}) => {
 
     const dispatch = useDispatch()
 
-    // Короче баг понятен, если вставить всё в null, то если есть изначальные реакции, при клике
-    // На текущую реакцию, мы сначала применим текущую реакцию, и только потом сможем от неё отказаться
-    // А локально наш стейт ничего не знает про внешнюю реакцию
     const [localCurrentReaction, setLocalCurrentReaction] = useState(null);
 
     useEffect(() => {
@@ -51,14 +48,12 @@ const PostItem = ({id, username, comment, reactions : {lol, like, angry}}) => {
         let clickedDataReaction = e.target.getAttribute('data-reaction')
 
         if (clickedDataReaction === localCurrentReaction) {
-            clickedDataReaction = null;
-          }
+            clickedDataReaction = null
+        }
       
-          // Обновляем локальный state
-          setLocalCurrentReaction(clickedDataReaction);
+        // Обновляем локальный state
+        setLocalCurrentReaction(clickedDataReaction)
 
-      
-        // Сделал эту логику
         dispatch(patchData({id, clickedDataReaction, currentUsername}))
     }
 

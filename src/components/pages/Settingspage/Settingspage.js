@@ -19,9 +19,15 @@ const Settingspage = () => {
     console.log(user)
 
     const handlePasswordChange = () => {
+
+        newPassword.clearError()
+        newPassword.trimValidation('Строка пароля не должна быть пустой!')
+        
+        
+        newPassword.setToInitialValue()
         // У меня для смены пароля уже написан pathcUser, только его нужно чуток поправить
         // Вернусь к этому функционалу, когда юзер будет в ЛС
-        // dispatch(patchUser({userID, clickedDataReaction, postID : id}))
+        // dispatch(patchUser({userID, newPassword}))
     }
 
 
@@ -38,7 +44,7 @@ const Settingspage = () => {
                     <h3>{user.id}</h3>
                 </div>
                 <div className="buttons">
-                    <label>
+                    <label className="change-password">
                         <p>Сменить пароль</p>
                             <input 
                                 type="text"
@@ -46,6 +52,7 @@ const Settingspage = () => {
                                 placeholder="Введите новый пароль"
                                 value={newPassword.value}/>
                             <button onClick={handlePasswordChange}>Сменить пароль</button>
+                            <p className="error-msg">{newPassword.errorMsg}</p>
                     </label>
 
                     <div className="extra-buttons">
