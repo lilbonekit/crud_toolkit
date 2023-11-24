@@ -1,4 +1,5 @@
 .post {
+    overflow-wrap: break-word;
     .content {
         display: flex;
         gap: 15px;
@@ -6,6 +7,7 @@
     .delete {
         height: 40px;
         display: flex;
+        font-size: 12px;
     }
     justify-content: space-between;
     display: flex;
@@ -21,6 +23,7 @@
     }
     .text {
         min-height: 75px;
+        // overflow-wrap: break-word;
     }
     min-height: 100px;
     .reaction {
@@ -38,6 +41,19 @@
             padding: 5px 12px;
             border: none;
             cursor: pointer
+        }
+    }
+}
+
+@media (max-width: 1220px) {
+    .post {
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        gap: 30px;
+        .delete {
+            width: fit-content;
+            font-size: 12px;
+            align-items: center;
         }
     }
 }

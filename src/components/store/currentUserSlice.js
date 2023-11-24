@@ -46,16 +46,17 @@ export const getUser = createAsyncThunk(
 
 export const patchUser = createAsyncThunk(
     'currentUser/patchUser',
-    async function({userID, clickedDataReaction}, {rejectWithValue, dispatch}) {
+    async function({id, newPassword}, {rejectWithValue, dispatch}) {
 
         try {
-             const response = await fetch(`http://localhost:3001/users/${userID}`, {
+            console.log(newPassword)
+             const response = await fetch(`http://localhost:3001/users/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    currentReaction: clickedDataReaction
+                    password: newPassword
                 })
             })
 
@@ -65,13 +66,13 @@ export const patchUser = createAsyncThunk(
 
             // console.log('Данные успешно обновились. Получаю нового юзера...')
 
-            const newResponse = await fetch(`http://localhost:3001/users/${userID}`)
+            const newResponse = await fetch(`http://localhost:3001/users/${id}`)
 
             if(!response.ok) {
                 throw new Error('Новый пользователь не был получен!')
             }
 
-            // console.log('Новый пользователь получен! Обновляю стейт...')
+            console.log('Новый пользователь получен! Обновляю стейт...')
             
             const newUser = await newResponse.json()
             dispatch(addUser({newUser, isLogged : true}))
@@ -139,7 +140,8 @@ const currentUserSlice = createSlice({
         },
         isLogged: false,
         status: 'idle',
-        error: false
+        error: false,
+        extraMessage: null
     },
     reducers: {
         addUser(state, action) {
@@ -147,6 +149,21 @@ const currentUserSlice = createSlice({
             state.user = action.payload.newUser
             state.status = 'idle'
             state.isLogged = action.payload.isLogged
+        },
+        clearExtraMessage(state, action) {
+            state.extraMessage = null
+        },
+        clearUser(state, action) {
+            state.user = {
+                username: null,
+                id: null,
+                password: null,
+                currentReaction: null,
+            }
+            state.isLogged = false
+            state.status = 'idle'
+            state.error = false
+            state.extraMessage = null
         }
     },
     extraReducers: (builder) => {
@@ -168,9 +185,27 @@ const currentUserSlice = createSlice({
             state.status = 'loading'
             state.error = false
         })
+
+        // Обрабатываю тут смену пароля PATCH
+
+        builder.addCase(patchUser.pending, (state, action) => {
+            state.status = 'loading'
+            state.error = false
+        })
+
+        builder.addCase(patchUser.rejected, (state, action) => {
+            state.status = 'idle'
+            state.error = 'Не удалось сменить пароль!'
+        })
+
+        builder.addCase(patchUser.fulfilled, (state, action) => {
+            state.status = 'idle'
+            state.error = false
+            state.extraMessage = 'Пароль успешно изменён!'
+        })
     }
 })
 
-const {addUser} = currentUserSlice.actions
+export const {clearExtraMessage, addUser, clearUser} = currentUserSlice.actions
 
 export default currentUserSlice.reducer

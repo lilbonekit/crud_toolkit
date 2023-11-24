@@ -3,6 +3,8 @@ header {
     padding: 40px;
     background-color: blueviolet;
     color: white;
+    flex-wrap: wrap;
+    gap: 30px;
     .username {
         font-weight: 700;
         display: flex;
@@ -76,6 +78,18 @@ header {
         &::after {
             width: 100%;
             transition: .3s all ease;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 30px 15px;
+        h1 {
+            font-size: 30px;
+        }
+        a {
+            font-size: 16px;
         }
     }
 }

@@ -10,7 +10,7 @@ p {
 
 section {
   min-height: 600px;
-  padding: 80px 0;
+  padding: 80px 15px;
   align-self: center;
 }
 
@@ -41,6 +41,12 @@ input[type="submit"] {
   margin-top: 3px;
 }
 
+.succes-msg {
+  color: green;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
 .input-error {
   border: 1px solid red;
 }
@@ -50,4 +56,10 @@ input[type="submit"] {
   color: gray;
   background-color: lightgray;
   cursor: not-allowed;
+}
+
+@media (max-width: 560px) {
+  section {
+    padding: 80px 15px;
+  }
 }

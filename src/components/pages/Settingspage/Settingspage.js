@@ -1,33 +1,39 @@
 import './Settingspage.scss'
 
 import useAuth from '../../hooks/useAuth'
-import { Exit, Trash } from '../../SVG/Spinner'
+import { Exit, Spinner } from '../../SVG/Spinner'
+
+import { patchUser, clearExtraMessage, clearUser } from '../../store/currentUserSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { useInput } from '../../hooks/useInput'
+import { useState } from 'react'
 
 const Settingspage = () => {
+    const [showPasswordPanel, setShowPasswordPanel] = useState(false)
+    const dispatch = useDispatch()
+    const {extraMessage, status} = useSelector(state => state.currentUser)
+
     const newPassword = useInput('')
-    // value, 
-    // syncValue, 
-    // setToInitialValue, 
-    // trimValidation, 
-    // errorMsg, 
-    // clearError,
-    // error
 
     const {user} = useAuth()
-    console.log(user)
 
     const handlePasswordChange = () => {
 
         newPassword.clearError()
         newPassword.trimValidation('Строка пароля не должна быть пустой!')
-        
-        
-        newPassword.setToInitialValue()
-        // У меня для смены пароля уже написан pathcUser, только его нужно чуток поправить
-        // Вернусь к этому функционалу, когда юзер будет в ЛС
-        // dispatch(patchUser({userID, newPassword}))
+
+        if(newPassword.value.trim().length !== 0) {
+            dispatch(patchUser({id : user.id, newPassword : newPassword.value}))
+            newPassword.setToInitialValue()
+        }
+    }
+
+    const togglePanel = () => {
+        setShowPasswordPanel(!showPasswordPanel)
+        if (extraMessage && showPasswordPanel) {
+            dispatch(clearExtraMessage())
+        }
     }
 
 
@@ -45,22 +51,35 @@ const Settingspage = () => {
                 </div>
                 <div className="buttons">
                     <label className="change-password">
-                        <p>Сменить пароль</p>
-                            <input 
-                                type="text"
-                                onChange={newPassword.syncValue} 
-                                placeholder="Введите новый пароль"
-                                value={newPassword.value}/>
-                            <button onClick={handlePasswordChange}>Сменить пароль</button>
-                            <p className="error-msg">{newPassword.errorMsg}</p>
+                        <p className="toggler" onClick={togglePanel}>Сменить пароль</p>
+                        {
+                            showPasswordPanel ?
+                            <>
+                                <input 
+                                    type="text"
+                                    onChange={newPassword.syncValue} 
+                                    placeholder="Введите новый пароль"
+                                    value={newPassword.value}/>
+                                <button onClick={handlePasswordChange}>Сменить пароль</button>
+                                <p className="error-msg">{newPassword.errorMsg}</p>
+                                {
+                                    extraMessage ?
+                                    <p className="succes-msg">{extraMessage}</p> :
+                                    null
+                                }
+                                {
+                                    status === 'loading' ?
+                                    <Spinner/> :
+                                    null
+                                }
+
+                            </> :
+                            null
+                        }
                     </label>
 
                     <div className="extra-buttons">
-                        <button className="delete">
-                            <Trash/>
-                            Удалить аккаунт
-                        </button>
-                        <button>
+                        <button className="red" onClick={() => dispatch(clearUser())}>
                             <Exit/>
                             Выйти с аккаунта
                         </button>

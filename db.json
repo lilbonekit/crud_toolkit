@@ -34,10 +34,12 @@
       "reactions": {
         "lol": [],
         "like": [
-          "йцу",
-          "1"
+          "йцу"
         ],
-        "angry": []
+        "angry": [
+          "4",
+          "1"
+        ]
       }
     },
     {
@@ -45,12 +47,25 @@
       "username": "ййй",
       "comment": "132",
       "reactions": {
-        "lol": [
-          "1"
+        "lol": [],
+        "like": [
+          "4"
         ],
+        "angry": [
+          "ййй",
+          "1"
+        ]
+      }
+    },
+    {
+      "id": "lpd74h0g0.9zbmygqqp3e",
+      "username": "1",
+      "comment": "123213",
+      "reactions": {
+        "lol": [],
         "like": [],
         "angry": [
-          "ййй"
+          "2"
         ]
       }
     }
@@ -58,8 +73,20 @@
   "users": [
     {
       "username": "1",
-      "password": "1",
+      "password": "2222",
       "id": "0.7861261555851682023-11-24T16:28:26.498Z",
+      "isLogged": true
+    },
+    {
+      "username": "4",
+      "password": "4",
+      "id": "0.325329753886239642023-11-24T21:56:13.603Z",
+      "isLogged": true
+    },
+    {
+      "username": "2",
+      "password": "",
+      "id": "0.27423224861815722023-11-24T22:32:02.088Z",
       "isLogged": true
     }
   ]
