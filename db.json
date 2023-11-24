@@ -1,34 +1,6 @@
 {
   "posts": [
     {
-      "id": "lpbg8z3r0.p0bew2cyj8m",
-      "username": "1",
-      "comment": "Post",
-      "reactions": {
-        "lol": [
-          "3",
-          "4"
-        ],
-        "like": [],
-        "angry": []
-      }
-    },
-    {
-      "id": "lpbmffnh0.sn773nvfyn9",
-      "username": "1",
-      "comment": "123213213",
-      "reactions": {
-        "lol": [],
-        "like": [
-          "3"
-        ],
-        "angry": [
-          "4",
-          "1"
-        ]
-      }
-    },
-    {
       "id": "lpbq2qf70.y3da2r0fjyn",
       "username": "3",
       "comment": "фівфв",
@@ -41,29 +13,51 @@
         "like": [],
         "angry": []
       }
+    },
+    {
+      "id": "lpcj1hzn0.hqo0ui0qugl",
+      "username": "йцу",
+      "comment": "фывцв",
+      "reactions": {
+        "lol": [
+          "йцу"
+        ],
+        "like": [],
+        "angry": []
+      }
+    },
+    {
+      "id": "lpcj23gs0.pkb77e62kme",
+      "username": "йцу",
+      "comment": "123123",
+      "reactions": {
+        "lol": [],
+        "like": [
+          "йцу"
+        ],
+        "angry": []
+      }
+    },
+    {
+      "id": "lpcj2hgi0.4c08o5j8au3",
+      "username": "ййй",
+      "comment": "132",
+      "reactions": {
+        "lol": [],
+        "like": [
+          "1"
+        ],
+        "angry": [
+          "ййй"
+        ]
+      }
     }
   ],
   "users": [
     {
       "username": "1",
       "password": "1",
-      "id": "0.96186177886548732023-11-23T21:02:06.794Z",
-      "currentReaction": "lol",
-      "isLogged": true
-    },
-    {
-      "username": "3",
-      "password": "3",
-      "id": "0.27509033033582612023-11-23T21:45:27.811Z",
-      "currentReaction": "lol",
-      "isLogged": true
-    },
-    {
-      "username": "4",
-      "password": "4",
-      "id": "0.48014741658560812023-11-24T09:14:29.803Z",
-      "interactedPostsID": [],
-      "currentReaction": "angry",
+      "id": "0.7861261555851682023-11-24T16:28:26.498Z",
       "isLogged": true
     }
   ]

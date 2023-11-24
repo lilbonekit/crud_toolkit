@@ -28,9 +28,7 @@ const RegForm = () => {
             const newUser = {
                 username : username.value,
                 password : password.value,
-                id,
-                interactedPostsID: [],
-                currentReaction: null
+                id
             }
             
             const isLogged = true

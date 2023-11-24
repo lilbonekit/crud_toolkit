@@ -2,8 +2,7 @@ import './PostItem.scss'
 
 import classNames from 'classnames';
 
-import { patchUser } from '../store/currentUserSlice'
-import { patchData, deletePost } from '../store/postsSlice'
+import { patchData, deleteData } from '../store/postsSlice'
 
 import { useDispatch } from 'react-redux'
 import useAuth from '../hooks/useAuth';
@@ -16,7 +15,6 @@ const PostItem = ({id, username, comment, reactions : {lol, like, angry}}) => {
     const state = useAuth()
     const currentUsername = state.user.username
 
-    const userID = state.user.id
     const dispatch = useDispatch()
 
     // Короче баг понятен, если вставить всё в null, то если есть изначальные реакции, при клике
@@ -26,16 +24,11 @@ const PostItem = ({id, username, comment, reactions : {lol, like, angry}}) => {
 
     useEffect(() => {
         if(like.includes(currentUsername)) {
-            console.log('Зашел like?')
             setLocalCurrentReaction('like')
         } else if(lol.includes(currentUsername)) {
-            console.log('Зашел lol?')
             setLocalCurrentReaction('lol')
-            return
         } else if(angry.includes(currentUsername)) {
-            console.log('Зашел angry?')
             setLocalCurrentReaction('angry')
-            return
         }
     }, [])
 
@@ -64,14 +57,8 @@ const PostItem = ({id, username, comment, reactions : {lol, like, angry}}) => {
           // Обновляем локальный state
           setLocalCurrentReaction(clickedDataReaction);
 
-        // Тут два диспатча нужно
-        // Один для того чтобы добавить реакцию
-        // Ебать мне сначала нужно запатчить юзера
-        // А потом заниматься логикой лайка
-        // Эть...
-
+      
         // Сделал эту логику
-        dispatch(patchUser({userID, clickedDataReaction, postID : id}))
         dispatch(patchData({id, clickedDataReaction, currentUsername}))
     }
 
@@ -113,7 +100,7 @@ const PostItem = ({id, username, comment, reactions : {lol, like, angry}}) => {
             {username === state.user.username ?
                 <button 
                 className="reaction__item delete"
-                onClick={() => dispatch(deletePost({id}))}>
+                onClick={() => dispatch(deleteData({id}))}>
                     🗑️ Удалить свой пост
                 </button> :
                 null

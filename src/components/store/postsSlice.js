@@ -135,8 +135,9 @@ export const patchData = createAsyncThunk(
 export const deleteData = createAsyncThunk(
     'posts/deleteData',
     async function({id}, {rejectWithValue, dispatch}) {
-
+        
         try {
+            console.log('Сам метод есть')
             const response = await fetch(`http://localhost:3001/posts/${id}`, {
                 method: 'DELETE'
             })
@@ -215,6 +216,11 @@ const postsSlice = createSlice({
 
         builder.addCase(deleteData.pending, (state, action) => {
             state.status = 'pending'
+            state.error = false
+        })
+
+        builder.addCase(deleteData.fulfilled, (state, action) => {
+            state.status = 'idle'
             state.error = false
         })
     }

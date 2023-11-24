@@ -3,11 +3,27 @@ import './Settingspage.scss'
 import useAuth from '../../hooks/useAuth'
 import { Exit, Trash } from '../../SVG/Spinner'
 
+import { useInput } from '../../hooks/useInput'
+
 const Settingspage = () => {
+    const newPassword = useInput('')
+    // value, 
+    // syncValue, 
+    // setToInitialValue, 
+    // trimValidation, 
+    // errorMsg, 
+    // clearError,
+    // error
+
     const {user} = useAuth()
     console.log(user)
-    // const id = useParams()
-    // console.log(id)
+
+    const handlePasswordChange = () => {
+        // У меня для смены пароля уже написан pathcUser, только его нужно чуток поправить
+        // Вернусь к этому функционалу, когда юзер будет в ЛС
+        // dispatch(patchUser({userID, clickedDataReaction, postID : id}))
+    }
+
 
     return(
         <section className="settings-page">
@@ -24,7 +40,12 @@ const Settingspage = () => {
                 <div className="buttons">
                     <label>
                         <p>Сменить пароль</p>
-                        <input type="text" placeholder="Введите новый пароль"/>
+                            <input 
+                                type="text"
+                                onChange={newPassword.syncValue} 
+                                placeholder="Введите новый пароль"
+                                value={newPassword.value}/>
+                            <button onClick={handlePasswordChange}>Сменить пароль</button>
                     </label>
 
                     <div className="extra-buttons">
