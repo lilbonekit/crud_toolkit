@@ -27,11 +27,10 @@ export const postData = createAsyncThunk(
             username,
             comment : value,
             reactions: {
-                lol: 0,
-                like: 0,
-                angry: 0,
-            },
-            currentReaction: null
+                lol: [],
+                like: [],
+                angry: [],
+            }
         }
 
         const response = await fetch('http://localhost:3001/posts', {
@@ -60,28 +59,73 @@ export const postData = createAsyncThunk(
 
 export const patchData = createAsyncThunk(
     'posts/patchData',
-    async function({id, clickedDataReaction, newReactionsObject}, {rejectWithValue, dispatch}) {
+    async function({id, clickedDataReaction, currentUsername}, {rejectWithValue, dispatch}) {
 
         try {
-            const response = await fetch(`http://localhost:3001/posts/${id}`, {
+
+            // Сначала вытащим все реакции
+            const response = await fetch(`http://localhost:3001/posts/${id}`)
+
+            if(!response.ok) {
+                throw new Error('Реакции не были получены')
+            }
+
+            console.log('Реакции были получены')
+            const { reactions } = await response.json()
+            // console.log(reactions)
+
+            // console.log(currentUsername)
+            
+            // Мне нужно было проверить все реакции, for (let key in reactions) {...}
+
+            // если в реакции ЕСТЬ имя и название реакции совпадает с clickedDataReaction if(key.includes(username)) {...}
+            // То удали в clickedDataReaction username reactions[clickedDataReaction] = filter(...)
+
+            // Если в реакции НЕТ имени и реакция совпадает с clickedDataReaction else if(key.includes(username)) {...}
+            // То запуш в clickedDataReaction username reactions[clickedDataReaction].push(username)
+            // Если переданная реакция null if (!clickedDataReaction) {key.filter(username)}
+            // То удали везде username 
+            // Если clickedDataReaction не определено, удали username из всех реакций
+            if (clickedDataReaction === null) {
+                for (let key in reactions) {
+                reactions[key] = reactions[key].filter(el => el !== currentUsername);
+                }
+            } else {
+                for (let key in reactions) {
+                    reactions[key] = reactions[key].filter(el => el !== currentUsername);
+                    }
+                // Если clickedDataReaction определено, обнови соответствующую реакцию
+                if (reactions[clickedDataReaction].includes(currentUsername)) {
+                reactions[clickedDataReaction] = reactions[clickedDataReaction].filter(el => el !== currentUsername);
+                } else {
+                    for (let key in reactions) {
+                        reactions[key] = reactions[key].filter(el => el !== currentUsername);
+                        }
+                reactions[clickedDataReaction].push(currentUsername);
+                }
+            }
+
+            // Тут было всё ок, патчим данные и записываем в стейт
+            // console.log('Перед отправкой посмотрим на реакции')
+            // console.log(reactions)
+            const newResponse = await fetch(`http://localhost:3001/posts/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    currentReaction: clickedDataReaction,
-                    reactions: newReactionsObject
+                    reactions: {...reactions}
                 })
             })
 
-            if(!response.ok) {
-                throw new Error('Пост был обновлён!')
+            if(!newResponse.ok) {
+                throw new Error('Не удалось обновить пост на сервере')
             }
 
-            console.log('Данные отправляются на сервер методом PATCH')
+            // Тут всё супер было, теперь в UI отрисуем
+            dispatch(editPost({id, reactions}))
 
-            dispatch(editPost({id, clickedDataReaction, newReactionsObject})) //Не забывать передавать объект
-
+              
         } catch (e) {
             return rejectWithValue(e.message)
         }
@@ -127,8 +171,7 @@ const postsSlice = createSlice({
         },
         editPost(state, action) {
             const item = state.posts.find(el => el.id === action.payload.id) //Нашли нужный элемент
-            item.currentReaction = action.payload.clickedDataReaction //Мутировали ему актуальный класс, чтобы внутри компонента условный рендеринг запустить
-            item.reactions = action.payload.newReactionsObject //Тупо меняем реакции, изначальное значение хранится в рефе в компоненте
+            item.reactions = action.payload.reactions //Тупо меняем реакции, изначальное значение хранится в рефе в компоненте
         },
         deletePost(state, action) {
             state.posts = state.posts.filter(el => el.id !== action.payload.id)

@@ -1,48 +1,79 @@
 import './PostItem.scss'
+
 import classNames from 'classnames';
+
+import { patchUser } from '../store/currentUserSlice'
 import { patchData, deletePost } from '../store/postsSlice'
+
 import { useDispatch } from 'react-redux'
 import useAuth from '../hooks/useAuth';
-import { useRef } from 'react'
+
+import { useState, useEffect } from 'react';
 
 
-const PostItem = ({id, username, comment, reactions : {lol, like, angry}, currentReaction}) => {
+const PostItem = ({id, username, comment, reactions : {lol, like, angry}}) => {
 
     const state = useAuth()
-    
-    //Мне нужны изначальные значения, потому что я буду откатываться к ним
-    const referalValues = useRef({lol, like, angry}).current  
+    const currentUsername = state.user.username
+
+    const userID = state.user.id
     const dispatch = useDispatch()
 
+    // Короче баг понятен, если вставить всё в null, то если есть изначальные реакции, при клике
+    // На текущую реакцию, мы сначала применим текущую реакцию, и только потом сможем от неё отказаться
+    // А локально наш стейт ничего не знает про внешнюю реакцию
+    const [localCurrentReaction, setLocalCurrentReaction] = useState(null);
 
-    // Функция для инкремента
-    const increaseReaction = (reaction, values) => {
-        values[reaction]++;
-    };
+    useEffect(() => {
+        if(like.includes(currentUsername)) {
+            console.log('Зашел like?')
+            setLocalCurrentReaction('like')
+        } else if(lol.includes(currentUsername)) {
+            console.log('Зашел lol?')
+            setLocalCurrentReaction('lol')
+            return
+        } else if(angry.includes(currentUsername)) {
+            console.log('Зашел angry?')
+            setLocalCurrentReaction('angry')
+            return
+        }
+    }, [])
 
+    const getButtonClasses = (reactionsArray) => {
+        return classNames('reaction__item', {
+          'reaction__item-active': reactionsArray && reactionsArray.includes(currentUsername),
+        });
+      };
+      
+
+
+    // Меняем этот функционал
+    // Передаём реакцию, логин пользователя и id поста
+    // Если в массиве реакции есть такой пользователь, то удаляем его от туда
+    // Если его нет, то записываем юзернейм в массив реакции
+    // Вытаскиваем длинну массива с реакциями
+    // Текущая реакция тоже записывается в стейт (пользователя), 
+    // чтобы в UI отобразить класс активности, только конкретному пользователю
     const handleReaction = (e) => {
         let clickedDataReaction = e.target.getAttribute('data-reaction')
 
-        if(clickedDataReaction === currentReaction) {
-            clickedDataReaction = null
-        }
+        if (clickedDataReaction === localCurrentReaction) {
+            clickedDataReaction = null;
+          }
+      
+          // Обновляем локальный state
+          setLocalCurrentReaction(clickedDataReaction);
 
-        const newReactionsObject = { ...referalValues };
+        // Тут два диспатча нужно
+        // Один для того чтобы добавить реакцию
+        // Ебать мне сначала нужно запатчить юзера
+        // А потом заниматься логикой лайка
+        // Эть...
 
-        // Намного лучше, чем большой switch case
-        if (['lol', 'angry', 'like'].includes(clickedDataReaction)) {
-            increaseReaction(clickedDataReaction, newReactionsObject);
-        }
-
-        // Патчим данные на сервер, а потом в стейт
-        dispatch(patchData({id, clickedDataReaction, newReactionsObject}))
+        // Сделал эту логику
+        dispatch(patchUser({userID, clickedDataReaction, postID : id}))
+        dispatch(patchData({id, clickedDataReaction, currentUsername}))
     }
-
-    const getButtonClasses = (reactionType) => {
-        return classNames('reaction__item', {
-          'reaction__item-active': currentReaction === reactionType,
-        });
-      };
 
     return(
         <li className="post" key={id}>
@@ -54,24 +85,27 @@ const PostItem = ({id, username, comment, reactions : {lol, like, angry}, curren
                         <p>{comment}</p>
                     </div>
                     <div className="reaction__wrapper">
-                        <button 
+                        <button
+                            disabled={!state.isLogged} 
                         // установил библиотеку classnames для оптимизации
-                            className={getButtonClasses('lol')}
+                            className={getButtonClasses(lol)}
                             data-reaction="lol"
                             onClick={handleReaction}>🤣 
-                            {lol}
+                            {lol.length}
                         </button>
                         <button
-                            className={getButtonClasses('like')} 
+                            disabled={!state.isLogged}
+                            className={getButtonClasses(like)} 
                             data-reaction="like"
                             onClick={handleReaction}>❤️
-                            {like}
+                            {like.length}
                         </button>
-                        <button 
-                            className={getButtonClasses('angry')} 
+                        <button
+                            disabled={!state.isLogged} 
+                            className={getButtonClasses(angry)} 
                             data-reaction="angry"
                             onClick={handleReaction}>😡 
-                            {angry}
+                            {angry.length}
                         </button>
                     </div>
                 </div>

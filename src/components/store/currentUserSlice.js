@@ -34,8 +34,47 @@ export const getUser = createAsyncThunk(
 
             if (isPasswordMathced) {
                 // console.log('Пароль правильный! Продолжаю авторизацию...')
-                dispatch(addUser({newUser, isLogged}))
+                // console.log(response)
+                dispatch(addUser({newUser : response[0], isLogged}))
             }
+
+        } catch (e) {
+            return rejectWithValue(e.message)
+        }
+    }
+)
+
+export const patchUser = createAsyncThunk(
+    'currentUser/patchUser',
+    async function({userID, clickedDataReaction}, {rejectWithValue, dispatch}) {
+
+        try {
+             const response = await fetch(`http://localhost:3001/users/${userID}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    currentReaction: clickedDataReaction
+                })
+            })
+
+            if(!response.ok) {
+                throw new Error('Данные не обновились!')
+            }
+
+            // console.log('Данные успешно обновились. Получаю нового юзера...')
+
+            const newResponse = await fetch(`http://localhost:3001/users/${userID}`)
+
+            if(!response.ok) {
+                throw new Error('Новый пользователь не был получен!')
+            }
+
+            // console.log('Новый пользователь получен! Обновляю стейт...')
+            
+            const newUser = await newResponse.json()
+            dispatch(addUser({newUser, isLogged : true}))
 
         } catch (e) {
             return rejectWithValue(e.message)
@@ -56,7 +95,7 @@ export const createUser = createAsyncThunk(
                 throw new Error('Данные не были загружены!')
             }
 
-            console.log('Пользователи были получены. Проверка...')
+            // console.log('Пользователи были получены. Проверка...')
 
             const response = await checkData.json();
 

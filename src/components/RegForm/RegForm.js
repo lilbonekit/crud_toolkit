@@ -9,7 +9,6 @@ const RegForm = () => {
     const dispatch = useDispatch()
 
     const {error, status} = useSelector(state => state.currentUser)
-    console.log(status)
 
     const username = useInput('')
     const password = useInput('')
@@ -23,11 +22,14 @@ const RegForm = () => {
         username.trimValidation('Строка логина не должна быть пустой!')
         password.trimValidation('Строка пароля не должна быть пустой!')
 
+        const id = Math.random() + new Date().toISOString()
+
         if(!username.error && !password.error && username.value && password.value) {
             const newUser = {
                 username : username.value,
                 password : password.value,
-                id: Math.random() + new Date().toISOString(),
+                id,
+                interactedPostsID: [],
                 currentReaction: null
             }
             

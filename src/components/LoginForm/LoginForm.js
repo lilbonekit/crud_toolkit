@@ -23,11 +23,10 @@ const LoginForm = () => {
         password.trimValidation('Строка пароля не должна быть пустой!')
 
         if(!username.error && !password.error && username.value && password.value) {
+
             const newUser = {
                 username : username.value,
                 password : password.value,
-                id: Math.random() + new Date().toISOString(),
-                currentReaction: null
             }
             
             const isLogged = true
